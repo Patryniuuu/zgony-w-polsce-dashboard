@@ -16,14 +16,21 @@ def wykres_woj_mw(filtered_df, wojewodztwo):
         y = "Wartosc",
         x = "Przyczyny.zgonów",
         color="Miasta...wieś",
+        barmode='group',
         text_auto=True,
         title="Przyczyny zgonow",
         color_discrete_map={
-            "miasto": "#7f7f7f",
+            "miasto": "#FF9f36",
             "wieś": "#2ca02c"
         },
         labels={'Wartosc': 'Wartość (na 100 tys. osób)', 'Przyczyny.zgonów':'Przyczyna zgonów', 'Miasta...wieś': 'Miejsce zamieszkania'}
     )
-    fig.layout.update(title= '',yaxis_title="Liczba zgonów (na 100 tys. osób)", xaxis_title="Przyczyna zgonów")
+    fig.layout.update(title= '',
+                      yaxis_title="Liczba zgonów (na 100 tys. osób)", 
+                      xaxis_title="Przyczyna zgonów",
+                      bargap=0.3,
+                      bargroupgap=0.1,
+                      margin={'t':30}
+                      )
     
     st.plotly_chart(fig, use_container_width=True)

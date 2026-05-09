@@ -16,6 +16,7 @@ def wykres_woj_plec(filtered_df, wojewodztwo):
         y = "Wartosc",
         x = "Przyczyny.zgonów",
         color="Płeć",
+        barmode='group',
         text_auto=True,
         title="Przyczyny zgonow",
         color_discrete_map={
@@ -24,6 +25,11 @@ def wykres_woj_plec(filtered_df, wojewodztwo):
         },
         labels={'Wartosc': 'Wartość (na 100 tys. osób)', 'Przyczyny.zgonów':'Przyczyna zgonów'}
     )
-    fig.layout.update(title='', yaxis_title="Liczba zgonów (na 100 tys. osób)", xaxis_title="Przyczyna zgonów")
+    fig.layout.update(title='', 
+                      yaxis_title="Liczba zgonów (na 100 tys. osób)", 
+                      xaxis_title="Przyczyna zgonów", 
+                      bargroupgap=0.1,
+                      margin={'t':30}
+                      )
 
     st.plotly_chart(fig, use_container_width=True)

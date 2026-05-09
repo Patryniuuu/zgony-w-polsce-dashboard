@@ -27,7 +27,8 @@ def wykres_mapa(filtered_df):
     fig.update_layout(
         title='',
         paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)'
+        plot_bgcolor='rgba(0,0,0,0)',
+        margin={"r":0,"t":0,"l":0,"b":0}
     )
     fig.update_geos(bgcolor='rgba(0,0,0,0)', projection_type="mercator",fitbounds="locations", visible=False)
     event = st.plotly_chart(fig, config={'uwidth': 'stretch'}, on_select="rerun", selection_mode='points')

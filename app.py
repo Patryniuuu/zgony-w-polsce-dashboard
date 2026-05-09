@@ -8,6 +8,26 @@ import narysuj_wykres_woj_plec
 import narysuj_wykres_woj_mw
 
 st.set_page_config(page_title="Na co umierają Polacy - dashboard", layout="wide")
+import streamlit as st
+
+st.set_page_config(layout="wide")
+
+st.markdown("""
+    <style>
+        /* Celujemy w główny kontener treści */
+        .block-container {
+            padding-top: 1rem;
+            padding-left: 1rem !important; /* Zmniejsza odstęp od sidebar */
+            padding-right: 1rem !important; /* Zmniejsza odstęp od prawej krawędzi */
+            max-width: 98% !important;     /* Pozwala treści rozciągnąć się bardziej na boki */
+        }
+        /* 2. Celujemy bezpośrednio w listę stron (nawigację) */
+        [data-testid="stSidebarNav"] {
+            padding-top: 0rem !important;
+            margin-top: -2rem !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
 st.title('Na co umierają Polacy?')
 @st.cache_data
 def load_data(file_path):
@@ -23,6 +43,7 @@ dane = load_data(r"dane/dane_bdl_zgony_2010_2024.csv")
 
 def strona_glowna():
     st.subheader('Strona główna')
+    st.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lectus est, eleifend et interdum et, commodo at tortor. Integer eleifend lorem ac rhoncus luctus. Aliquam ac mattis ligula. Morbi fermentum arcu pharetra nibh placerat, nec aliquet est varius. Proin in accumsan tellus. Donec id justo sed nibh ullamcorper pharetra. Nunc ultricies neque ac ex porta, vitae sollicitudin massa sodales. Sed a imperdiet est. Etiam porta odio nec vulputate volutpat. Vivamus pulvinar enim ut diam sagittis ornare. Vivamus posuere nisi nunc, vitae interdum lectus efficitur eget. Etiam at facilisis libero, in scelerisque nulla. Vestibulum consequat erat nec nibh mollis mollis. Curabitur at ullamcorper nibh. Donec rutrum fermentum velit, eu pretium lectus ullamcorper eu. Integer egestas ullamcorper imperdiet. Suspendisse egestas, est eu tempor tempus, ante lacus volutpat ante, vel condimentum erat metus rhoncus sem. Vivamus egestas imperdiet ipsum, ac dapibus mauris bibendum facilisis. Etiam non congue risus, id molestie ipsum. In hac habitasse platea dictumst. Vestibulum interdum, mi molestie dictum rutrum, justo ante egestas libero, sed consequat erat ipsum vel ante. Donec risus arcu, euismod aliquam tristique in, elementum a velit. Aenean facilisis, justo vel efficitur cursus, sem mauris pretium turpis, non dictum augue mi ut diam. Quisque feugiat eget massa at semper. Aliquam erat volutpat. Pellentesque quam ipsum, placerat a quam vel, venenatis luctus enim. Pellentesque at arcu in mauris eleifend condimentum in vitae purus. Curabitur bibendum maximus elit, mattis dignissim nulla rutrum eget. Suspendisse varius condimentum elit eget laoreet.")
 
 def strona_dynamika():
     st.subheader('Dynamika chorób w Polsce')
@@ -93,20 +114,19 @@ def strona_mapa():
         st.subheader(f"Mapa zgonów spowodowanych przez {df_filtered["Przyczyny.zgonów"].unique()[0]} w roku {df_filtered["Rok"].unique()[0]}")
         woj=narysuj_wykres_mapa.wykres_mapa(df_filtered)
     with col2:
-        st.header('Statystyki')
-        if woj==0:
-            st.write("Wybrane województwo: brak")
-        else:
-            st.write(f"Wybrane województwo: {woj}")
-        st.write(f"Wybrany rok: {rok}")
-        st.subheader('Rozkład ze względu na')
+        st.subheader('Rozkłady ze względu na płeć i miejsce zamieszkania')
         col21, col22 = st.columns(2)
         with col21:
-            st.subheader('Płeć')
+            #st.subheader('Płeć')
             narysuj_wykres_woj_plec.wykres_woj_plec(df_filtered, woj)
         with col22:
-            st.subheader('Miejsce zamieszkania')
+            #st.subheader('Miejsce zamieszkania')
             narysuj_wykres_woj_mw.wykres_woj_mw(df_filtered, woj)
+        if woj==0:
+            st.write(f"Wybrane województwo: brak, wybrany rok: {rok}")
+        else:
+            st.write(f"Wybrane województwo: {woj}, wybrany rok: {rok}")
+
 
 pg = st.navigation([
     st.Page(strona_glowna, title="Strona główna", icon='🏠'),
