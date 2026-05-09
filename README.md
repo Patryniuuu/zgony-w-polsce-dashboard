@@ -3,7 +3,7 @@
 Interaktywny dashboard stworzony w Pythonie z wykorzystaniem biblioteki **Streamlit**, służący do wizualizacji i analizy danych demograficznych dotyczących przyczyn zgonów w Polsce. Dane pochodzą z Banku Danych Lokalnych GUS.
 
 ## 🚀 Link do aplikacji
-[👉 KLIKNIJ TUTAJ, ABY OTWORZYĆ DASHBOARD](https://zgony-w-polsce-dashboard-pk-bo.streamlit.app/)
+[👉 KLIKNIJ TUTAJ, ABY OTWORZYĆ DASHBOARD](https://zgony-w-polsce-dashboard-pk-bo-po.streamlit.app/)
 
 ---
 
