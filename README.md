@@ -29,4 +29,4 @@ Aplikacja podzielona jest na trzy główne moduły:
 ## 👥 Autorzy
 * [Patryk Kubik](https://github.com/Patryyniuuu)
 * [Bartosz Obłoj](https://github.com/oblojb)
-
+* Patrycja Olszańska
