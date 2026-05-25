@@ -155,13 +155,14 @@ def strona_dynamika():
     st.markdown("### 📝 Komentarz: Krajobraz epidemiologiczny Polski")
     
     st.markdown("""
-    Prezentowany domyślnie zestaw pięciu najczęstszych przyczyn zgonów w Polsce w latach 2010–2024 pozwala na wyciągnięcie kluczowych wniosków:
+    Prezentowany domyślnie zestaw pięciu najczęstszych przyczyn zgonów w Polsce w latach 2010 – 2024 pozwala na wyciągnięcie kluczowych wniosków:
 
     * **Bezwzględna dominacja układu krążenia:** Wykres wyraźnie pokazuje, że **choroby układu krążenia** (jasnoniebieska linia) drastycznie odskakują od pozostałych przyczyn, utrzymując się na poziomie między 400 a 500 zgonów na 100 tys. mieszkańców. To niezmiennie główny czynnik umieralności w polskim społeczeństwie.
     
     * **Stabilny i wysoki trend onkologiczny:** Linie reprezentujące **nowotwory** (zielona) oraz **nowotwory złośliwe** (różowa) biegną niemal równolegle w okolicach 250 zgonów na 100 tys. osób. W przeciwieństwie do układu krążenia, nowotwory wykazują stały, lekki trend wzrostowy na przestrzeni całego badanego okresu, co obrazuje starzenie się społeczeństwa.
     
-    * **Wpływ pandemii i umieralność nadmiarowa (2020–2022):** * Na wykresie doskonale widać załamanie trendów w okresie COVID-19. Dla chorób układu krążenia pik przypada na **2021 rok** (blisko 480 zgonów). 
+    * **Wpływ pandemii i umieralność nadmiarowa (2020 – 2022):** 
+        * Na wykresie doskonale widać załamanie trendów w okresie COVID-19. Dla chorób układu krążenia pik przypada na **2021 rok** (blisko 480 zgonów). 
         * Zwróć uwagę na ciemnoniebieską linię (**choroba niedokrwienna serca**) – tam również najwyższy punkt przypada na 2021 rok (około 200 zgonów).
         * Czerwona linia (**przyczyny niedokładnie określone**) dynamicznie rosła już od 2016 roku, osiągając swój szczyt w pandemicznym roku 2020 (ok. 130 zgonów), co może świadczyć o trudnościach diagnostycznych w początkowej fazie paraliżu służby zdrowia.
     
