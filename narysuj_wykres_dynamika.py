@@ -17,25 +17,29 @@ def wykres_dynamika(filtered_df):
         "Wartość": "Wskaźnik zgonów",
         "Rok": "Rok badania"}   
     )
+    
+    fig.update_traces(
+        hovertemplate="%{fullData.name}: <b>%{y:.1f}</b><extra></extra>"
+    )
+    
+    
     fig.update_layout(
         title="Wskaźnik zgonów (na 100 tys. mieszkańców)",
         xaxis_title="Rok",
         yaxis_title="Wskaźnik śmiertelności (na 100 tys. osób)",
-        # Na osi X ma byc co roku tick
         xaxis=dict(tickmode='linear', dtick=1), 
         
-        #legenda na dole
         legend=dict(
-            title=None,              # Usuwamy zbędny napis "Przyczyny.zgonów" nad legendą
-            orientation="h",         # Ustawiamy legendę poziomo 
-            yanchor="top", y=-0.2,   # Wypychamy ją pod oś X
-            xanchor="center", x=0.5  # Centrujemy idealnie na środku
+            title=None,              
+            orientation="h",         
+            yanchor="top", y=-0.2,   
+            xanchor="center", x=0.5  
         ),
         
-        # dymek po najechaniu
+        # Łączymy wszystkie linie w jeden wspólny dymek na osi X
         hovermode="x unified", 
         
         font=dict(size=14)
-    )    
+    )
     
     st.plotly_chart(fig, use_container_width=True)
