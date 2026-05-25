@@ -43,8 +43,9 @@ def wykres_slupki(filtered_df, wybor):
         }  
     )
     
+    
     fig.update_layout(
-        title_x=0.4,
+        title_x=0.4 if wybor == "Płeć" else 0.34,
         title_y=0.9,
         xaxis_title="Liczba zgonów (na 100 tys. osób)",
         yaxis={'categoryorder': 'total ascending'},    

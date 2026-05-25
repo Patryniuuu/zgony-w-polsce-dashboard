@@ -76,7 +76,7 @@ def strona_glowna():
     st.caption("""
     Dane wykorzystane w projekcie pochodzą z *Banku Danych Lokalnych Głównego Urzędu Statystycznego (GUS)*. 
     Zbiór danych obejmuje oficjalne statystyki medyczne dotyczące zarejestrowanych przyczyn zgonów w Polsce. 
-    Wskaźniki zostały standaryzowane na 100 tysięcy mieszkańców, co pozwala na obiektywne porównywanie 
+    Wskaźniki zostały ustandaryzowane na 100 tysięcy mieszkańców, co pozwala na obiektywne porównywanie 
     regionów o różnej liczbie ludności oraz grup o różnej liczebności.
     🔗 **[Przejdź do źródła danych w BDL](https://bdl.stat.gov.pl/bdl/metadane/metryka/3977#)**
     """)
@@ -116,7 +116,7 @@ def strona_dynamika():
         default=top5_chorob
     )
     plec = st.sidebar.selectbox("Wybierz płeć", df["Płeć"].unique())
-    wojewodztwo = st.sidebar.selectbox("Wybierz rozważany obszar", df["Nazwa"].unique())
+    wojewodztwo = st.sidebar.selectbox("Wybierz rozważany obszar (Polska/Województwo)", df["Nazwa"].unique())
     obszar = st.sidebar.selectbox("Wybierz rozważany obszar", df["Miasta...wieś"].unique())
     df_filtered = df[(df['Rok'] >= lata[0]) & 
                        (df['Rok'] <= lata[1]) & 
@@ -125,7 +125,7 @@ def strona_dynamika():
                        (df['Nazwa'] == wojewodztwo) &   
                        (df["Miasta...wieś"] == obszar)]
     df_filtered = df_filtered.sort_values(by="Rok", ascending = True)
-    narysuj_wykres_dynamika.wykres_dynamika(df_filtered)
+    narysuj_wykres_dynamika.wykres_dynamika(df_filtered, wojewodztwo, plec, obszar)
     
     
     
@@ -161,7 +161,7 @@ def strona_dynamika():
     
     * **Stabilny i wysoki trend onkologiczny:** Linie reprezentujące **nowotwory** (zielona) oraz **nowotwory złośliwe** (różowa) biegną niemal równolegle w okolicach 250 zgonów na 100 tys. osób. W przeciwieństwie do układu krążenia, nowotwory wykazują stały, lekki trend wzrostowy na przestrzeni całego badanego okresu, co obrazuje starzenie się społeczeństwa.
     
-    * **Wpływ pandemii i umieralność nadmiarowa (2020–2022):** * Na wykresie doskonale widać załamanie trendów w okresie COVID-19. Dla chorób układu krążenia potężny pik przypada na **2021 rok** (blisko 480 zgonów). 
+    * **Wpływ pandemii i umieralność nadmiarowa (2020–2022):** * Na wykresie doskonale widać załamanie trendów w okresie COVID-19. Dla chorób układu krążenia pik przypada na **2021 rok** (blisko 480 zgonów). 
         * Zwróć uwagę na ciemnoniebieską linię (**choroba niedokrwienna serca**) – tam również najwyższy punkt przypada na 2021 rok (około 200 zgonów).
         * Czerwona linia (**przyczyny niedokładnie określone**) dynamicznie rosła już od 2016 roku, osiągając swój szczyt w pandemicznym roku 2020 (ok. 130 zgonów), co może świadczyć o trudnościach diagnostycznych w początkowej fazie paraliżu służby zdrowia.
     

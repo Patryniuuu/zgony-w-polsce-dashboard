@@ -4,7 +4,7 @@ import plotly.express as px
 
 
 
-def wykres_dynamika(filtered_df):
+def wykres_dynamika(filtered_df, wojewodztwo, plec, obszar):
     fig = px.line(
         data_frame = filtered_df,
         x = "Rok",
@@ -25,7 +25,7 @@ def wykres_dynamika(filtered_df):
     
     fig.update_layout(
         #title="Wskaźnik zgonów (na 100 tys. mieszkańców)",
-        title="Dynamika zgonów",
+        title=f"Dynamika zgonów ({wojewodztwo.capitalize()} | {plec} | {obszar})",
         xaxis_title="Rok",
         yaxis_title="Wskaźnik śmiertelności (na 100 tys. osób)",
         xaxis=dict(tickmode='linear', dtick=1), 
