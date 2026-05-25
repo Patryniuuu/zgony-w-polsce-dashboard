@@ -42,9 +42,53 @@ def load_data(file_path):
 dane = load_data(r"dane/dane_bdl_zgony_2010_2024.csv")
 
 def strona_glowna():
-    st.subheader('Strona główna')
-    st.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lectus est, eleifend et interdum et, commodo at tortor. Integer eleifend lorem ac rhoncus luctus. Aliquam ac mattis ligula. Morbi fermentum arcu pharetra nibh placerat, nec aliquet est varius. Proin in accumsan tellus. Donec id justo sed nibh ullamcorper pharetra. Nunc ultricies neque ac ex porta, vitae sollicitudin massa sodales. Sed a imperdiet est. Etiam porta odio nec vulputate volutpat. Vivamus pulvinar enim ut diam sagittis ornare. Vivamus posuere nisi nunc, vitae interdum lectus efficitur eget. Etiam at facilisis libero, in scelerisque nulla. Vestibulum consequat erat nec nibh mollis mollis. Curabitur at ullamcorper nibh. Donec rutrum fermentum velit, eu pretium lectus ullamcorper eu. Integer egestas ullamcorper imperdiet. Suspendisse egestas, est eu tempor tempus, ante lacus volutpat ante, vel condimentum erat metus rhoncus sem. Vivamus egestas imperdiet ipsum, ac dapibus mauris bibendum facilisis. Etiam non congue risus, id molestie ipsum. In hac habitasse platea dictumst. Vestibulum interdum, mi molestie dictum rutrum, justo ante egestas libero, sed consequat erat ipsum vel ante. Donec risus arcu, euismod aliquam tristique in, elementum a velit. Aenean facilisis, justo vel efficitur cursus, sem mauris pretium turpis, non dictum augue mi ut diam. Quisque feugiat eget massa at semper. Aliquam erat volutpat. Pellentesque quam ipsum, placerat a quam vel, venenatis luctus enim. Pellentesque at arcu in mauris eleifend condimentum in vitae purus. Curabitur bibendum maximus elit, mattis dignissim nulla rutrum eget. Suspendisse varius condimentum elit eget laoreet.")
+    st.header('Strona główna')
+    st.subheader('🏠 O projekcie')
+    
+    st.markdown("""
+    Witaj w interaktywnym dashboardzie analitycznym poświęconym analizie struktury i dynamiki umieralności w Polsce. 
+    Projekt został stworzony w celach edukacyjnych, aby w przystępny i wizualny sposób zobrazować, jakie schorzenia i czynniki 
+    mają największy wpływ na śmiertelność Polaków na przestrzeni ostatnich kilkunastu lat.
+    """)
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.info("📅 **Zakres czasowy:**\n\nLata 2010 – 2024")
+    with col2:
+        st.info("🧬 **Przekroje analizy:**\n\nPłeć, Województwo, Miasto/Wieś")
+    with col3:
+        st.info("📉 **Jednostka miary:**\n\nWskaźnik na 100 tys. ludności")
 
+    st.markdown("---")
+    
+    st.subheader('🗺️ Struktura i nawigacja aplikacji')
+    st.markdown("""
+    Aplikacja została zaprojektowana w sposób modułowy i pozwala na analizę danych z różnych perspektyw:  
+    **📈 Dynamika chorób:**  
+                Moduł dedykowany analizie trendów czasowych. Pozwala prześledzić, jak zmieniała się śmiertelność na wybrane choroby na przestrzeni lat, a także porównać strukturę zgonów (według płci lub miejsca zamieszkania) dla konkretnego, wskazanego roku.  
+    **🗺️ Przestrzenna analiza danych:**  
+                Interaktywna mapa Polski w podziale na województwa. Pozwala zidentyfikować regiony o najwyższym i najniższym nasileniu zgonów z powodu konkretnej choroby, uzupełniona o lokalne wykresy rozkładów demograficznych.
+    """)
+
+    st.markdown("---")
+
+    st.subheader('🗃️ Źródło danych')
+    st.caption("""
+    Dane wykorzystane w projekcie pochodzą z *Banku Danych Lokalnych Głównego Urzędu Statystycznego (GUS)*. 
+    Zbiór danych obejmuje oficjalne statystyki medyczne dotyczące zarejestrowanych przyczyn zgonów w Polsce. 
+    Wskaźniki zostały standaryzowane na 100 tysięcy mieszkańców, co pozwala na obiektywne porównywanie 
+    regionów o różnej liczbie ludności oraz grup o różnej liczebności.
+    🔗 **[Przejdź do źródła danych w BDL](https://bdl.stat.gov.pl/bdl/metadane/metryka/3977#)**
+    """)
+    
+    st.markdown("---")
+    
+    st.markdown("""
+    <div style="text-align: right; color: gray; font-style: italic;">
+        Projekt został zrealizowany w ramach przedmiotu Wstęp do Eksploracji Danych.<br>
+        <b>Autorzy:</b> Patryk Kubik, Bartosz Obłoj, Patrycja Olszańska
+    </div>
+    """, unsafe_allow_html=True)
 def strona_dynamika():
     st.subheader('Dynamika chorób w Polsce')
     # Wskazówka dla użytkownika (Komentarz do wykresów)
@@ -173,8 +217,20 @@ def strona_mapa():
     
     st.sidebar.write('Filtry dla mapy')
     rok = st.sidebar.selectbox("Wybierz rok", sorted(dane['Rok'].unique(), reverse=True))
-    choroba = st.sidebar.selectbox('Wybierz chorobę', dane["Przyczyny.zgonów"].unique())
+    choroba = st.sidebar.selectbox('Wybierz przyczynę', dane["Przyczyny.zgonów"].unique())
     df_filtered = dane[(dane["Rok"]==rok) & (dane["Przyczyny.zgonów"]==choroba)]
+    st.info("""
+    💡 **Jak korzystać z tej zakładki:**
+
+    * **Panel boczny (Filtry dla strony):**
+    Z rozwijanych list po lewej stronie wybierz interesujący Cię **rok** oraz **chorobę** (przyczynę zgonów). Zmiana tych parametrów automatycznie zaktualizuje całą stronę – zarówno mapę, jak i wykresy po prawej stronie.
+
+    * **Lewa strona (Analiza przestrzenna):**
+    Mapa Polski przedstawia natężenie wybranego zjawiska w poszczególnych województwach. Im ciemniejszy kolor, tym wyższy wskaźnik (liczba zgonów na 100 tys. osób). **Najedź kursorem** na dowolne województwo, aby zobaczyć jego nazwę i dokładną wartość. **Kliknij na region**, aby przefiltrować wykresy słupkowe wyłącznie do danych z tego województwa (kliknij ponownie, by wrócić do widoku całej Polski).
+    
+    * **Prawa strona (Rozkłady demograficzne):**
+    Wykresy szczegółowo rozbijają wybrane statystyki ze względu na **płeć** (lewy wykres) oraz **miejsce zamieszkania** (prawy wykres).
+    """)
     col1, col2 = st.columns(2)
     with col1:
         #st.header('Mapa Polski')
@@ -190,16 +246,15 @@ def strona_mapa():
             #st.subheader('Miejsce zamieszkania')
             narysuj_wykres_woj_mw.wykres_woj_mw(df_filtered, woj)
         if woj==0:
-            st.write(f"Wybrane województwo: brak, wybrany rok: {rok}")
+            st.write(f"Wybrane województwo: brak")
         else:
-            st.write(f"Wybrane województwo: {woj}, wybrany rok: {rok}")
+            st.write(f"Wybrane województwo: {woj}")
 
 
 pg = st.navigation([
     st.Page(strona_glowna, title="Strona główna", icon='🏠'),
     st.Page(strona_dynamika, title="Dynamika chorób", icon="📈"),
-    st.Page(strona_mapa, title="Przestrzenna analiza dancyh chorobowych", icon="🗺️"),
-    #st.Page(strona_wykresy, title="Porównanie przyczyn zgonów", icon="📊")
+    st.Page(strona_mapa, title="Przestrzenna analiza danych chorobowych", icon="🗺️")
 ])
 
 pg.run()
