@@ -21,7 +21,7 @@ def wykres_mapa(filtered_df):
         locations='JPT_NAZWA_',
         featureidkey="properties.JPT_NAZWA_",
         color='Wartosc',
-        color_continuous_scale="Viridis",
+        color_continuous_scale="blugrn",
         labels={'Wartosc': 'Wartość (na 100 tys. osób)', 'JPT_NAZWA_':'Nazwa województwa'}
     )
     fig.update_layout(
@@ -31,6 +31,13 @@ def wykres_mapa(filtered_df):
         margin={"r":0,"t":0,"l":0,"b":0}
     )
     fig.update_geos(bgcolor='rgba(0,0,0,0)', projection_type="mercator",fitbounds="locations", visible=False)
+    
+
+    fig.update_traces(hovertemplate=
+                      "Województwo: %{location}<br>"+
+                      "Wartość (na 100 tys. osób) = %{z}" +
+                      "<extra></extra>"
+                      )
     event = st.plotly_chart(fig, config={'uwidth': 'stretch'}, on_select="rerun", selection_mode='points')
     if len(event.get('selection').get('points'))==0:
         woj=0
@@ -44,12 +51,4 @@ def wykres_mapa(filtered_df):
 
 
 
-# mapa_final.plot(
-#     column='Wartosc', 
-#     cmap=sns.light_palette("#87ae73", as_cmap=True), 
-#     linewidth=0.8, 
-#     ax=ax, 
-#     edgecolor='white', #Białe granice województw
-#     legend=True,
-#     legend_kwds={'label': "Liczba samobójstw (na 100 tys. mieszkańców)", 'orientation': "horizontal", 'pad': 0.05}
-# )
+
