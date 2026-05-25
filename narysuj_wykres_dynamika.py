@@ -24,7 +24,8 @@ def wykres_dynamika(filtered_df):
     
     
     fig.update_layout(
-        title="Wskaźnik zgonów (na 100 tys. mieszkańców)",
+        #title="Wskaźnik zgonów (na 100 tys. mieszkańców)",
+        title="Dynamika zgonów",
         xaxis_title="Rok",
         yaxis_title="Wskaźnik śmiertelności (na 100 tys. osób)",
         xaxis=dict(tickmode='linear', dtick=1), 

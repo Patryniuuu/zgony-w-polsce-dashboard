@@ -90,8 +90,7 @@ def strona_glowna():
     </div>
     """, unsafe_allow_html=True)
 def strona_dynamika():
-    st.subheader('Dynamika chorób w Polsce')
-    # Wskazówka dla użytkownika (Komentarz do wykresów)
+    
     st.info("""
     💡 **Jak korzystać z tej zakładki:**
     * **Wykres górny (Dynamika):** Domyślnie pokazuje trend czasowy dla pierwszej choroby z listy, uwzględniając ogólne statystyki dla całej Polski. W panelu bocznym możesz dodać kolejne choroby do porównania, zawęzić zakres lat oraz przefiltrować dane dla konkretnego województwa, płci lub miejsca zamieszkania.
@@ -116,7 +115,6 @@ def strona_dynamika():
         options=df["Przyczyny.zgonów"].unique(), 
         default=top5_chorob
     )
-    #choroby = st.sidebar.multiselect("wybierz choroby", df["Przyczyny.zgonów"].unique(), default=df["Przyczyny.zgonów"].unique()[0])
     plec = st.sidebar.selectbox("Wybierz płeć", df["Płeć"].unique())
     wojewodztwo = st.sidebar.selectbox("Wybierz rozważany obszar", df["Nazwa"].unique())
     obszar = st.sidebar.selectbox("Wybierz rozważany obszar", df["Miasta...wieś"].unique())
@@ -131,19 +129,14 @@ def strona_dynamika():
     
     
     
-    # --- NOWOŚĆ: INTEGRACJA SŁUPKÓW ---
     st.markdown("---")
     
-    # Informacja zwrotna (podtytuł o tym co jest pokazane - z Waszej listy TODO!)
-    st.subheader(f"Szczegółowa struktura dla wybranego roku ({wojewodztwo.capitalize()} | {obszar} | {plec})")
+    st.subheader(f"Szczegółowa struktura dla wybranego roku ({wojewodztwo.capitalize()})")
     
-    # Użytkownik wybiera TYLKO rok. Cała reszta danych jest już ustawiona w sidebarze.
     lata_dostepne = list(range(lata[0], lata[1] + 1))
     wybrany_rok = st.selectbox("Wybierz rok do analizy struktury (podział na płeć/obszar):", lata_dostepne)
     
-    # 3. FILTROWANIE DLA WYKRESU SŁUPKOWEGO (Dolnego)
-    # Bierzemy: ten sam rok, te same choroby, to samo województwo.
-    # Ale UWAGA: Ignorujemy płeć i obszar z sidebara, bo na słupkach chcemy ZOBACZYĆ te podziały!
+    
     df_slupki = df[(df['Rok'] == wybrany_rok) & 
                    (df['Przyczyny.zgonów'].isin(choroby)) & 
                    (df['Nazwa'] == wojewodztwo)]
@@ -152,7 +145,6 @@ def strona_dynamika():
     if wybor_struktury == "Obszar":
         wybor_struktury = "Miasta...wieś"
 
-    # Wykluczamy z analizy sumaryczne "ogółem" dla płci/obszaru, żeby wykres był czytelny
     df_slupki = df_slupki[df_slupki[wybor_struktury] != "ogółem"]
     
     if len(choroby) > 0:
@@ -160,7 +152,6 @@ def strona_dynamika():
     else:
         st.warning("Wybierz przynajmniej jedną chorobę w panelu bocznym.")
         
-    # --- DEDYKOWANY KOMENTARZ DO AKTUALNEGO TOP 5 Z WYKRESU ---
     st.markdown("### 📝 Komentarz: Krajobraz epidemiologiczny Polski")
     
     st.markdown("""
