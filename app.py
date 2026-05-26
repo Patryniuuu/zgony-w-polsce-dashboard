@@ -96,6 +96,8 @@ def strona_dynamika():
     * **Wykres górny (Dynamika):** Domyślnie pokazuje trend czasowy dla pierwszej choroby z listy, uwzględniając ogólne statystyki dla całej Polski. W panelu bocznym możesz dodać kolejne choroby do porównania, zawęzić zakres lat oraz przefiltrować dane dla konkretnego województwa, płci lub miejsca zamieszkania.
     * **Wykres dolny (Struktura):** Pojawia się automatycznie po wybraniu chorób. Pozwala sprawdzić szczegółowy podział (na płeć lub obszar) w konkretnym roku. Możesz zmieniać badany rok za pomocą selektora pod wykresem dynamiki.
     """)
+    st.markdown("---")
+    
     st.sidebar.write('Filtry do dynamiki chorób')
     #Odfiltrujemy chorobe ogolem
     df = dane[dane["Przyczyny.zgonów"]!="ogółem"]
@@ -151,6 +153,8 @@ def strona_dynamika():
         narysuj_wykres_przyczyny.wykres_slupki(df_slupki, wybor_struktury)
     else:
         st.warning("Wybierz przynajmniej jedną chorobę w panelu bocznym.")
+      
+    st.markdown("---")
         
     st.markdown("### 📝 Komentarz: Krajobraz epidemiologiczny Polski")
     
@@ -223,6 +227,7 @@ def strona_mapa():
     * **Prawa strona (Rozkłady demograficzne):**
     Wykresy szczegółowo rozbijają wybrane statystyki ze względu na **płeć** (lewy wykres) oraz **miejsce zamieszkania** (prawy wykres).
     """)
+    st.markdown("---")
     col1, col2 = st.columns(2)
     with col1:
         #st.header('Mapa Polski')
