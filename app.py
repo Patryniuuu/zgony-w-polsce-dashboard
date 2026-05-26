@@ -170,7 +170,7 @@ def strona_dynamika():
         * Zwróć uwagę na ciemnoniebieską linię (**choroba niedokrwienna serca**) – tam również najwyższy punkt przypada na 2021 rok (około 200 zgonów).
         * Czerwona linia (**przyczyny niedokładnie określone**) dynamicznie rosła już od 2016 roku, osiągając swój szczyt w pandemicznym roku 2020 (ok. 130 zgonów), co może świadczyć o trudnościach diagnostycznych w początkowej fazie paraliżu służby zdrowia.
     
-    * **Powrót do bazy po 2022 roku:** W latach 2023–2024 widoczne jest wyraźne opadanie linii układu krążenia oraz choroby niedokrwiennej serca. Statystyki powracają do wieloletnich trendów sprzed pandemii, co oznacza wygasanie fali zgonów nadmiarowych.
+    * **Powrót do bazy po 2022 roku:** W latach 2023 – 2024 widoczne jest wyraźne opadanie linii układu krążenia oraz choroby niedokrwiennej serca. Statystyki powracają do wieloletnich trendów sprzed pandemii, co oznacza wygasanie fali zgonów nadmiarowych.
     """)
 # SEKCJA Z SŁUPAKMI POKI CO USUWAMY JĄ
 # def strona_wykresy():
