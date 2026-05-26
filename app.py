@@ -246,6 +246,21 @@ def strona_mapa():
             st.write(f"Wybrane województwo: brak")
         else:
             st.write(f"Wybrane województwo: {woj}")
+    st.markdown("---")
+
+    st.markdown("### 📝 Ciekawe przypadki, które można zaobserwować")
+    st.markdown("""
+    Pobaw się filtrami w panelu bocznym i sprawdź, czy uda Ci się zaobserwować te znane zjawiska demograficzne i epidemiologiczne:
+
+    * 📉 **„Ciemna plama” na mapie (Fenomen województwa łódzkiego):** Nawet w statystykach dla przyczyny **„ogółem”**, województwo łódzkie od lat wyróżnia się najciemniejszym kolorem. Wynika to z historycznych i ekonomicznych uwarunkowań regionu, który mierzy się z najszybciej starzejącym się społeczeństwem i najkrótszą przewidywaną długością życia w Polsce.
+    
+    * ⚠️ **Tragiczne skutki wypadków i samobójstw:** Wybierz **„wypadki komunikacyjne”**, **"samobójstwa"** lub **"zewnętrzne przyczyny zgonu"**. Lewy wykres słupkowy pokaże drastyczną, kilkukrotną przewagę mężczyzn. To smutne zjawisko ogólnoświatowe, wynikające z częstszego podejmowania ryzykownych zachowań, pracy w niebezpiecznych zawodach oraz rzadszego szukania pomocy psychologicznej.
+
+    * 🧠 **Paradoks długowieczności (Alzheimer i nadciśnienie):** Zmień przyczynę na **„chorobę Alzheimera”** lub **„chorobę nadciśnieniową"**. Tym razem sytuacja się odwraca i to słupek kobiet jest znacznie wyższy. Nie oznacza to jednak, że są one biologicznie słabsze – kobiety w Polsce żyją średnio o około 8 lat dłużej od mężczyzn, dlatego znacznie częściej dożywają sędziwego wieku, w którym te konkretne schorzenia zbierają największe żniwo.
+            
+    * 🏭 **Nowotwory a miejsce zamieszkania:** Wybierz **„nowotwory”**. Spójrz na prawy wykres słupkowy. Bardzo często to mieszkańcy miast charakteryzują się wyższymi wskaźnikami zachorowalności na raka, co bywa wiązane z większym zanieczyszczeniem środowiska w aglomeracjach oraz innym stylem życia, ale też... z lepszą i szybszą diagnostyką w ośrodkach miejskich.
+    """)
+
 
 
 pg = st.navigation([
