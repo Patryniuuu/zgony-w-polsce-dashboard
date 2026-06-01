@@ -10,7 +10,7 @@ def wykres_woj_mw(filtered_df, wojewodztwo):
     if wojewodztwo != 0:
         filtered_df=filtered_df[filtered_df['Nazwa']==wojewodztwo]
     else:
-        filtered_df=filtered_df[filtered_df['Nazwa']=='polska']
+        filtered_df=filtered_df[filtered_df['Nazwa']=='Polska']
     fig = px.bar(
         data_frame=filtered_df,
         y = "Wartosc",
