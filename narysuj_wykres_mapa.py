@@ -38,7 +38,11 @@ def wykres_mapa(filtered_df):
                       "Wartość (na 100 tys. osób) = %{z}" +
                       "<extra></extra>"
                       )
-    event = st.plotly_chart(fig, config={'uwidth': 'stretch'}, on_select="rerun", selection_mode='points')
+    event = st.plotly_chart(fig,
+                            use_container_width=True, 
+                            config={'scrollZoom': False}, 
+                            on_select="rerun", 
+                            selection_mode=["points"])
     if len(event.get('selection').get('points'))==0:
         woj=0
     else:

@@ -30,8 +30,8 @@ def wykres_woj_plec(filtered_df, wojewodztwo):
                       xaxis_title="Przyczyna zgonów",
                       bargap=0.3, 
                       bargroupgap=0.1,
-                      margin=dict(l=70, r=20, t=10, b=50), # l=80 zamraża lewą stronę, r=150 prawą
-                      yaxis=dict(automargin=False),         # Blokujemy osi Y możliwość "rozpychania się"
+                      margin=dict(l=70, r=20, t=10, b=30), 
+                      yaxis=dict(automargin=False),         
                       xaxis=dict(automargin=False),
                       legend=dict(
                         entrywidth=65,
@@ -44,6 +44,9 @@ def wykres_woj_plec(filtered_df, wojewodztwo):
                         bgcolor="rgba(0,0,0,0)"
                         )
                       )
+    fig.update_xaxes(
+    title_text='',        
+    showticklabels=False)
     fig.update_traces(width=0.3, hovertemplate="Przyczyna zgonów: %{x}<br>" +
                   "Płeć: %{data.name}<br>" +
                   "Wartość (na 100 tys. osób): %{y}" +

@@ -30,7 +30,7 @@ def wykres_woj_mw(filtered_df, wojewodztwo):
                       xaxis_title="Przyczyna zgonów",
                       bargap=0.3,
                       bargroupgap=0.1,
-                      margin=dict(l=70, r=20, t=10, b=50),
+                      margin=dict(l=70, r=20, t=10, b=30),
                       yaxis=dict(automargin=False),
                       xaxis=dict(automargin=False),
                       legend=dict(
@@ -44,6 +44,9 @@ def wykres_woj_mw(filtered_df, wojewodztwo):
                         bgcolor="rgba(0,0,0,0)"
                         )
                       )
+    fig.update_xaxes(
+    title_text='',        
+    showticklabels=False)
     fig.update_traces(width=0.3, hovertemplate="Przyczyna zgonów: %{x}<br>" +
                   "Miejsce zamieszkania: %{data.name}<br>" +
                   "Wartość (na 100 tys. osób): %{y}" +

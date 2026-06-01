@@ -37,6 +37,7 @@ def load_data(file_path):
     nowa_nazwa = "przyczyny niedokładnie określone"
     df['Przyczyny.zgonów'] = df['Przyczyny.zgonów'].replace(stara_nazwa, nowa_nazwa)
     df['Nazwa']=df['Nazwa'].str.lower()
+    df.loc[df['Nazwa'] == 'polska', 'Nazwa'] = 'Polska'
     return df
 
 dane = load_data(r"dane/dane_bdl_zgony_2010_2024.csv")
@@ -96,6 +97,7 @@ def strona_dynamika():
     * **Wykres górny (Dynamika):** Domyślnie pokazuje trend czasowy dla pierwszej choroby z listy, uwzględniając ogólne statystyki dla całej Polski. W panelu bocznym możesz dodać kolejne choroby do porównania, zawęzić zakres lat oraz przefiltrować dane dla konkretnego województwa, płci lub miejsca zamieszkania.
     * **Wykres dolny (Struktura):** Pojawia się automatycznie po wybraniu chorób. Pozwala sprawdzić szczegółowy podział (na płeć lub obszar) w konkretnym roku. Możesz zmieniać badany rok za pomocą selektora pod wykresem dynamiki.
     """)
+    st.markdown("💡 **[Kliknij tutaj, aby zjechać w dół do komentarza odnośnie domyślnie wybranego zestawienia chorób 👇](#komentarz)**")
     st.markdown("---")
     
     st.sidebar.write('Filtry do dynamiki chorób')
@@ -113,13 +115,14 @@ def strona_dynamika():
     
     # Przekazujemy top5_chorob jako domyślnie zaznaczone (default)
     choroby = st.sidebar.multiselect(
-        "wybierz choroby", 
+        "Wybierz choroby", 
         options=df["Przyczyny.zgonów"].unique(), 
-        default=top5_chorob
+        default=top5_chorob,
+        max_selections=5
     )
     plec = st.sidebar.selectbox("Wybierz płeć", df["Płeć"].unique())
     wojewodztwo = st.sidebar.selectbox("Wybierz rozważany obszar (Polska/Województwo)", df["Nazwa"].unique())
-    obszar = st.sidebar.selectbox("Wybierz rozważany obszar", df["Miasta...wieś"].unique())
+    obszar = st.sidebar.selectbox("Wybierz rozważany obszar zamieszkania", df["Miasta...wieś"].unique())
     df_filtered = df[(df['Rok'] >= lata[0]) & 
                        (df['Rok'] <= lata[1]) & 
                        (df['Przyczyny.zgonów'].isin(choroby)) & 
@@ -143,8 +146,8 @@ def strona_dynamika():
                    (df['Przyczyny.zgonów'].isin(choroby)) & 
                    (df['Nazwa'] == wojewodztwo)]
     
-    wybor_struktury = st.radio("Porównaj według:", ["Płeć", "Obszar"], horizontal=True)
-    if wybor_struktury == "Obszar":
+    wybor_struktury = st.radio("Porównaj według:", ["Płeć", "Obszar zamieszkania"], horizontal=True)
+    if wybor_struktury == "Obszar zamieszkania":
         wybor_struktury = "Miasta...wieś"
 
     df_slupki = df_slupki[df_slupki[wybor_struktury] != "ogółem"]
@@ -153,9 +156,9 @@ def strona_dynamika():
         narysuj_wykres_przyczyny.wykres_slupki(df_slupki, wybor_struktury)
     else:
         st.warning("Wybierz przynajmniej jedną chorobę w panelu bocznym.")
-      
+    
+    st.markdown("<div id='komentarz'></div>", unsafe_allow_html=True)
     st.markdown("---")
-        
     st.markdown("### 📝 Komentarz: Krajobraz epidemiologiczny Polski")
     
     st.markdown("""
@@ -227,14 +230,21 @@ def strona_mapa():
     * **Prawa strona (Rozkłady demograficzne):**
     Wykresy szczegółowo rozbijają wybrane statystyki ze względu na **płeć** (lewy wykres) oraz **miejsce zamieszkania** (prawy wykres).
     """)
+    st.markdown("💡 **[Kliknij tutaj, aby zjechać w dół do najciekawszych przypadków w danych 👇](#ciekawostki2)**")
     st.markdown("---")
     col1, col2 = st.columns(2)
     with col1:
         #st.header('Mapa Polski')
         st.subheader(f"Mapa zgonów spowodowanych przez {df_filtered['Przyczyny.zgonów'].unique()[0]} w roku {df_filtered['Rok'].unique()[0]}")
+        st.subheader('')
         woj=narysuj_wykres_mapa.wykres_mapa(df_filtered)
     with col2:
-        st.subheader('Rozkłady ze względu na płeć i miejsce zamieszkania')
+        if woj==0:
+            st.subheader(f'Rozkłady ze względu na płeć i miejsce zamieszkania')
+            st.subheader(f'(Polska | {choroba} | {rok})')
+        else:
+            st.subheader(f'Rozkłady ze względu na płeć i miejsce zamieszkania ')
+            st.subheader(f'({woj} | {choroba} | {rok})')
         col21, col22 = st.columns(2)
         with col21:
             #st.subheader('Płeć')
@@ -242,12 +252,8 @@ def strona_mapa():
         with col22:
             #st.subheader('Miejsce zamieszkania')
             narysuj_wykres_woj_mw.wykres_woj_mw(df_filtered, woj)
-        if woj==0:
-            st.write(f"Wybrane województwo: brak")
-        else:
-            st.write(f"Wybrane województwo: {woj}")
+    st.markdown("<div id='ciekawostki2'></div>", unsafe_allow_html=True)
     st.markdown("---")
-
     st.markdown("### 📝 Ciekawe przypadki, które można zaobserwować")
     st.markdown("""
     Pobaw się filtrami w panelu bocznym i sprawdź, czy uda Ci się zaobserwować te znane zjawiska demograficzne i epidemiologiczne:
