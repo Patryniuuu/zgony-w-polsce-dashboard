@@ -121,7 +121,7 @@ def strona_dynamika():
         max_selections=5
     )
     plec = st.sidebar.selectbox("Wybierz płeć", df["Płeć"].unique())
-    wojewodztwo = st.sidebar.selectbox("Wybierz rozważany obszar (Polska/Województwo)", df["Nazwa"].unique())
+    wojewodztwo = st.sidebar.selectbox("Wybierz rozważany obszar (Polska/województwo)", df["Nazwa"].unique())
     obszar = st.sidebar.selectbox("Wybierz rozważany obszar zamieszkania", df["Miasta...wieś"].unique())
     df_filtered = df[(df['Rok'] >= lata[0]) & 
                        (df['Rok'] <= lata[1]) & 
@@ -136,7 +136,7 @@ def strona_dynamika():
     
     st.markdown("---")
     
-    st.subheader(f"Szczegółowa struktura dla wybranego roku ({wojewodztwo.capitalize()})")
+    st.subheader(f"Szczegółowa struktura dla wybranego roku ({wojewodztwo})")
     
     lata_dostepne = list(range(lata[0], lata[1] + 1))
     wybrany_rok = st.selectbox("Wybierz rok do analizy struktury (podział na płeć/obszar):", lata_dostepne)

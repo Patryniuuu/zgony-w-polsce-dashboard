@@ -36,6 +36,7 @@ def wykres_slupki(filtered_df, wybor):
         barmode="group",
         height=700,
         title=f"Przyczyny zgonów z podziałem na {zm}",
+        hover_data=[wybor],
         labels={
             "Przyczyny.zgonów": "Choroba",
             "Wartosc": "Liczba zgonów (na 100 tys. osób)",
@@ -60,9 +61,7 @@ def wykres_slupki(filtered_df, wybor):
             "Przekrój: %{customdata[0]}<br>"            # Płeć lub Miejsce zamieszkania
             "Wskaźnik zgonów: <b>%{x:.1f}</b><br>"       # Liczba zgonów zaokrąglona do 1 miejsca po przecinku
             "<extra></extra>"                           # Ten pusty tag usuwa brzydki boczny pasek z nazwą serii
-        ),
-        # Musimy przekazać zmienną 'wybor' jako customdata, żeby template mógł ją przeczytać
-        customdata=df_plot[[wybor]]
+        )
     )
     
     st.plotly_chart(fig, use_container_width=True)
